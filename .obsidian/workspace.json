@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "9c0de099fc1eb3f2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Terraform OVH Cloud VM.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "0e7d32817b4e5f6d",
             "type": "leaf",
             "state": {
@@ -44,7 +32,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -95,7 +83,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "f4cc132e6257e8ed",
@@ -174,9 +163,12 @@
   },
   "active": "359698c93e5e4aa2",
   "lastOpenFiles": [
+    "OVH_Openstack_Account.png",
+    "Terraform projects structure.md",
     "OpenSSL managing credentials.md",
     "Terraform OVH Cloud VM.md",
-    "Terraform projects structure.md",
+    "Pasted image 20230524115729.png",
+    "Pasted image 20230524114446.png",
     "TerraformInAction_Folder_Structure.png",
     "Pasted image 20230523112330.png",
     "Untitled.canvas",

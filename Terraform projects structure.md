@@ -10,8 +10,6 @@ The general idea behind it
 ### Overview of file structure
 
 ```plantuml
-!theme metal
-
 map "**root [./]**" as root {
   main.tf  => Entry point
   variables.tf => Input variables to\ncustomize deployment
@@ -28,7 +26,6 @@ map "**modules/virtual_machines**" as vms {
   main.tf  => Entry point
   variables.tf => Input variables to\ncustomize deployment
   outputs.tf => Deployment output variables
-  providers.tf => Provider declarations
   versions.tf => Provider version locking
 }
 
@@ -45,7 +42,7 @@ root::main ..> networks: loads in main.tf
 root::main ..> databases: loads in main.tf
 ```
 
-## Init Script
+## Script to create initial Terraform folder structure
 Creates basic file structure and configuration
 
 ```bash
@@ -116,6 +113,8 @@ tee -a ./versions.tf << END
 #TODO: Provider lib and its versions https://registry.terraform.io/browse/providers. Provider examples see below.
 END
 ```
+After the above script is executed you can delete it.
+Select one of the below example provider configurations to setup a VM.
 
 ## Example configuration
 * [[Terraform OVH Cloud VM]]
