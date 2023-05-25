@@ -132,16 +132,27 @@ echo "OVH_APPLICATION_SECRET: $OVH_APPLICATION_SECRET"
 echo "OVH_CONSUMER_KEY: $OVH_CONSUMER_KEY"
 ```
 
-### Input configuration | `modules/virtual_machines/` 
+## Create ssh key-pair
+
+This will create a `private` and `public key` which will be used to connect to those vm. Just add something useful in the commets section.
+
+```bash
+# Create a ssh key-pair 
+ssh-keygen -t ed25519 -C "{{Identifiaction/comment}}" -o -f keys/deployment_ssh
+```
+
+## Input configuration | `modules/virtual_machines/variables.tf` 
+Declare variables we will use in this module
+
 ```bash
 variable "ssh_keypair" {
   description = "SSH keypair to use for VM instances"
-  default     = "../files/keys/public.ssh"
+  default     = "./keys/deployment_ssh.pub"
   type        = string
 }
 
 # Amount of db server nodes
-variable "db_cluster_count {
+variable "db_cluster_count" {
   type    = number
   default = 3
 }
@@ -153,7 +164,7 @@ variable "worker_node_count" {
 }
 ```
 
-### Application configuration | `main.tf`
+## Application configuration | `main.tf`
 Here is the application itself. In our case we will just load the vm
 
 ```bash
@@ -164,7 +175,7 @@ module "virtual_machines" {
 }
 ```
 
-### Provider configuration | `providers.tf`
+## Provider configuration | `providers.tf`
 As `OVH` is using internally `OpenStack` for VM management we have to load [OpenStack Provider](https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs) first. We only need those in the root `versions.tf` as it will be interit to the modules.
 
 ```bash
@@ -174,10 +185,11 @@ provider "openstack" {
 }
 
 provider "ovh" {
+  endpoint = "ovh-eu"
 }
 ```
 
-### Version configuration | `versions.tf` and `modules/virtual_machines/versions.tf`
+## Version configuration | `versions.tf` and `modules/virtual_machines/versions.tf`
 
 Here we add the version information of the libs we and our submodules will use. As this is required in the root and all modules this libs is used we must add it in two `version.tf` files.
 
@@ -198,7 +210,7 @@ terraform {
 }
 ```
 
-### VM configuration | `modules/virtual_machines/mail.tf`
+## VM configuration | `modules/virtual_machines/mail.tf`
 The actual module implemtation which is just upload new public key and ramp up the servers.
 
 ```bash
@@ -240,6 +252,53 @@ resource "openstack_compute_instance_v2" "worker_servers" {
   network {
     name = "Ext-Net" # Adds the network component to reach your instance
   }
+}
+```
+
+## Outputs | `outputs.tf` and `module/virtual_machines/outputs.tf`
+Lets extract the vm name and ip address from the generated vms
+
+```hcl
+# Creates map of servers with its ip addresses
+locals {
+  db_server_map = [for server in openstack_compute_instance_v2.db_servers :
+    {
+      name : server.name
+      ip_v4 : server.access_ip_v4
+    }
+  ]
+  worker_server_map = [for client in openstack_compute_instance_v2.worker_servers :
+    {
+      name : client.name
+      ip_v4 : client.access_ip_v4
+    }
+  ]
+}
+
+# List created vms
+output "worker_servers" {
+  sensitive = true
+  value     = local.worker_server_map
+}
+
+output "db_servers" {
+  sensitive = true
+  value     = local.db_server_map
+}
+```
+
+Lets get the vm name and is public ip address
+```hcl
+# outputs.tf
+
+output "db_servers" {
+  sensitive = true
+  value     = module.virtual_machines.db_servers
+}
+
+output "worker_servers" {
+  sensitive = true
+  value     = module.virtual_machines.worker_servers
 }
 ```
 
