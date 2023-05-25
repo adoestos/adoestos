@@ -53,7 +53,6 @@ mkdir modules/virtual_machines
 touch modules/virtual_machines/main.tf
 touch modules/virtual_machines/variables.tf
 touch modules/virtual_machines/outputs.tf
-touch modules/virtual_machines/providers.tf
 touch modules/virtual_machines/versions.tf
 
 # Stores ssh public and optionally private keys
