@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "0e7d32817b4e5f6d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "OpenSSL managing credentials.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "359698c93e5e4aa2",
             "type": "leaf",
             "state": {
@@ -30,9 +18,20 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "a5d1eead9e682da7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Multitiered Web Application.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -78,13 +77,11 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "f4cc132e6257e8ed",
@@ -161,19 +158,21 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "359698c93e5e4aa2",
+  "active": "7965731f6cfecdfc",
   "lastOpenFiles": [
+    "Untitled.canvas",
+    "Terraform OVH Cloud VM.md",
+    "VSCodeVim Shortcuts.md",
+    "OpenSSL managing credentials.md",
+    "Multitiered Web Application.md",
+    "create_exporter.sh",
     "OVH_Openstack_Account.png",
     "Terraform projects structure.md",
-    "OpenSSL managing credentials.md",
-    "Terraform OVH Cloud VM.md",
     "Pasted image 20230524115729.png",
     "Pasted image 20230524114446.png",
     "TerraformInAction_Folder_Structure.png",
     "Pasted image 20230523112330.png",
-    "Untitled.canvas",
     "Pasted image 20230523112359.png",
-    "VSCodeVim Shortcuts.md",
     "2023-05-23.md",
     "NoteStar.md",
     "NeverNote.md",
